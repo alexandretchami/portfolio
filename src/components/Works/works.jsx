@@ -7,6 +7,8 @@ import Portfolio4 from '../../assets/portfolio-4.png'
 import Portfolio5 from '../../assets/portfolio-5.png'
 import Portfolio6 from '../../assets/portfolio-6.png'
 import Portfolio7 from '../../assets/portfolio-7.png'
+import Portfolio8 from '../../assets/portfolio-8.png'
+
 
 const Works = () => {
   return (
@@ -21,6 +23,7 @@ const Works = () => {
             <img src={Portfolio5} alt="Portfolio5" className="worksImg" />
             <img src={Portfolio6} alt="Portfolio6" className="worksImg" />
             <img src={Portfolio7} alt="Portfolio7" className="worksImg" />
+            <img src={Portfolio8} alt="Portfolio8" className="worksImg" />
         </div>
         <button className="workBtn">Voir plus</button>
     </section>
