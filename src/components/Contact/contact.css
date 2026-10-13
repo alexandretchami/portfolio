@@ -1,91 +1,258 @@
+/* ===== Services + Contact section ===== */
 #contactPage {
+    --contact-accent: #4f9cff;
+    --contact-bg-field: rgb(38, 38, 42);
+    --contact-border: rgba(255, 255, 255, 0.1);
+    --contact-text-muted: rgba(255, 255, 255, 0.72);
+    --contact-success: #4ade80;
+    --contact-error: #f87171;
+
+    width: 100%;
+    max-width: 70rem;
     min-height: calc(100vh - 4rem);
-    width: 100vw;
-    max-width: 60rem;
     margin: 0 auto;
-    text-align: center;
+    padding: clamp(3rem, 8vw, 6rem) 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: clamp(4rem, 10vw, 7rem);
+    text-align: center;
 }
 
-.contactPageTitle {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.serviceDesc {
-    font-weight: 300;
-    font-size: 1rem;
-}
-
-.serviceImgs {
-    margin: 1rem 0;
+#services,
+#contact {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ----- Titles ----- */
+.contactPageTitle {
+    margin: 0 0 1.5rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+.contactPageTitle::after {
+    content: '';
+    display: block;
+    width: 3.5rem;
+    height: 0.25rem;
+    margin: 0.75rem auto 0;
+    border-radius: 999px;
+    background: var(--contact-accent);
+}
+
+.serviceDesc,
+.contactDesc {
+    max-width: 40rem;
+    margin: 0 0 2.5rem;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--contact-text-muted);
+}
+
+/* ----- Services ----- */
+.serviceImgs {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 1.25rem;
+}
+
+.serviceItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.75rem 1rem;
+    border: 1px solid var(--contact-border);
+    border-radius: 1rem;
+    background: var(--contact-bg-field);
+    transition: transform 0.25s ease, border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.serviceItem:hover {
+    transform: translateY(-6px);
+    border-color: var(--contact-accent);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
 }
 
 .serviceImg {
-    object-fit: cover;
-    width: 23%;
-    min-width: 9rem;
-    margin: auto;
-    padding: 0.25rem;
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
 }
 
-#services {
-    padding: 2rem;
+.serviceLabel {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
-.contactDesc {
-    padding: 1rem;
-    font-size: medium;
-    font-weight: 300;
-}
-
+/* ----- Form ----- */
 .contactForm {
-    margin: 1rem;
+    width: 100%;
+    max-width: 38rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90vw;
-    max-width: 60rem;
+    align-items: stretch;
+    gap: 1.25rem;
+    text-align: left;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.formGroup label {
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .name,
 .email,
 .msg {
-    font-size: medium;
     width: 100%;
-    max-width: 40rem;
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
-    color: white;
-    border: none;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--contact-border);
     border-radius: 0.5rem;
-    background: rgb(40, 40, 40);
+    background: var(--contact-bg-field);
+    color: #fff;
+    font: inherit;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.msg {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+.name::placeholder,
+.email::placeholder,
+.msg::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.name:focus,
+.email:focus,
+.msg:focus {
+    outline: none;
+    border-color: var(--contact-accent);
+    box-shadow: 0 0 0 3px rgba(79, 156, 255, 0.25);
 }
 
 .submitBtn {
-    background: white;
-    border: none;
+    align-self: center;
+    margin-top: 0.5rem;
+    padding: 0.85rem 3.5rem;
+    border: 2px solid #fff;
     border-radius: 0.5rem;
-    margin: 2rem;
-    padding: 0.75rem 3.5rem;
+    background: #fff;
+    color: #111;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease,
+        transform 0.25s ease, opacity 0.25s ease;
 }
 
+.submitBtn:hover:not(:disabled) {
+    background: transparent;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.submitBtn:focus-visible,
+.link:focus-visible {
+    outline: 3px solid var(--contact-accent);
+    outline-offset: 3px;
+}
+
+/* Feedback message after submit */
+.formStatus {
+    min-height: 1.5rem;
+    margin: 0;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.formStatus.success {
+    color: var(--contact-success);
+}
+
+.formStatus.error {
+    color: var(--contact-error);
+}
+
+/* ----- Social links ----- */
 .links {
+    margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
 }
 
 .link {
-    object-fit: cover;
-    height: 3rem;
-    width: 3rem;
-    margin: 0 0.75rem;
-    cursor: pointer;
+    display: inline-flex;
+    border-radius: 50%;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    opacity: 0.85;
+}
+
+.link:hover {
+    transform: translateY(-3px) scale(1.1);
+    opacity: 1;
+}
+
+.link img {
+    width: 2.75rem;
+    height: 2.75rem;
+    object-fit: contain;
+}
+
+/* ----- Responsive ----- */
+@media screen and (max-width: 480px) {
+    .serviceImgs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .submitBtn {
+        width: 100%;
+    }
+}
+
+/* ----- Reduced motion ----- */
+@media (prefers-reduced-motion: reduce) {
+    .serviceItem,
+    .submitBtn,
+    .link,
+    .name,
+    .email,
+    .msg {
+        transition: none;
+    }
+
+    .serviceItem:hover,
+    .submitBtn:hover:not(:disabled),
+    .link:hover {
+        transform: none;
+    }
 }

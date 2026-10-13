@@ -4,6 +4,7 @@ import Intro from "./components/Intro/intro";
 import Navbar from "./components/NavBar/navbar";
 import Skills from "./components/Skills/skills";
 import Works from "./components/Works/works";
+console.log({ Navbar, Intro, Skills, Works, Contact, Footer });
 
 function App() {
   return (

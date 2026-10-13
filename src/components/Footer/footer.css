@@ -1,10 +1,52 @@
+/* ===== Footer ===== */
 .footer {
-    width: 100vw;
-    height: 4rem;
-    background: rgb(40, 40, 40);
+    --footer-bg: rgb(30, 30, 34);
+    --footer-border: rgba(255, 255, 255, 0.08);
+    --footer-accent: #4f9cff;
+    --footer-text-muted: rgba(255, 255, 255, 0.65);
+
+    width: 100%;
+    padding: 1.5rem;
+    border-top: 1px solid var(--footer-border);
+    background: var(--footer-bg);
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    gap: 0.75rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
     font-weight: 300;
-    font-size: small;
+    color: var(--footer-text-muted);
+}
+
+.footerCopy {
+    margin: 0;
+}
+
+.footerCopy strong {
+    font-weight: 600;
+    color: #fff;
+}
+
+.footerTop {
+    color: var(--footer-text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footerTop:hover {
+    color: var(--footer-accent);
+}
+
+.footerTop:focus-visible {
+    outline: 3px solid var(--footer-accent);
+    outline-offset: 3px;
+    border-radius: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footerTop {
+        transition: none;
+    }
 }

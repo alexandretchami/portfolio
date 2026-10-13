@@ -1,73 +1,154 @@
+/* ===== Skills section ===== */
 #skills {
-    overflow: hidden;
-    width: 100vh;
-    max-width: 65rem;
+    --skills-bg-card: rgb(38, 38, 42);
+    --skills-bg-card-hover: rgb(46, 46, 52);
+    --skills-border: rgba(255, 255, 255, 0.08);
+    --skills-accent: #4f9cff;
+    --skills-text-muted: rgba(255, 255, 255, 0.72);
+
+    width: 100%;
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
-    margin: 0 auto;
 }
 
+/* ----- Header ----- */
 .skillTitle {
-    font-size: 3rem;
-    font-weight: 600;
-    padding-top: 3rem;
-    margin-bottom: 1.5rem;
+    position: relative;
+    margin: 0 0 2rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+/* Small accent underline under the title */
+.skillTitle::after {
+    content: '';
+    display: block;
+    width: 3.5rem;
+    height: 0.25rem;
+    margin: 0.75rem auto 0;
+    border-radius: 999px;
+    background: var(--skills-accent);
 }
 
 .skillDesc {
+    max-width: 46rem;
+    margin: 0 0 3rem;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
     font-weight: 300;
-    font-size: 1rem;
-    max-width: 51rem;
-    padding: 0 2rem;
+    line-height: 1.75;
+    color: var(--skills-text-muted);
 }
 
+/* ----- Cards grid ----- */
 .skillBars {
-    margin: 1.5rem;
-    width: 100vw;
-    max-width: 80%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.5rem;
     text-align: left;
 }
 
 .skillBar {
     display: flex;
-    margin: 1rem;
-    padding: 1.5rem 2rem;
-    border-radius: 0.5rem;
-    background: rgb(50, 50, 50);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 2rem;
+    border: 1px solid var(--skills-border);
+    border-radius: 1rem;
+    background: var(--skills-bg-card);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    transition: transform 0.25s ease, box-shadow 0.25s ease,
+        border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.skillBar:hover,
+.skillBar:focus-within {
+    transform: translateY(-6px);
+    border-color: var(--skills-accent);
+    background: var(--skills-bg-card-hover);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
 }
 
 .skillBarImg {
-    object-fit: cover;
-    height: 3rem;
-    width: 3rem;
-    margin-right: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0.6rem;
+    border-radius: 0.75rem;
+    background: rgba(79, 156, 255, 0.12);
+    object-fit: contain;
 }
 
-.skillBarText>p {
-    font-size: 0.9rem;
-    font-weight: 200;
+.skillBarText h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
 }
 
+.skillBarText p {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--skills-text-muted);
+}
+
+/* ----- Technology tags ----- */
+.skillTags {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skillTag {
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgba(79, 156, 255, 0.5);
+    border-radius: 999px;
+    background: rgba(79, 156, 255, 0.12);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+/* Skills still being learned: dashed and softer */
+.skillTag.learning {
+    border-style: dashed;
+    background: transparent;
+    color: var(--skills-text-muted);
+}
+
+/* ----- Responsive ----- */
 @media screen and (max-width: 720px) {
-    .skillBarText>p {
-        font-size: 2vw;
+    .skillBars {
+        grid-template-columns: 1fr;
+    }
+
+    .skillBar {
+        padding: 1.5rem;
     }
 }
 
-@media screen and (max-width: 480px) {
-    .skillBarText>p {
-        font-size: 3vw;
+/* ----- Respect users who prefer less motion ----- */
+@media (prefers-reduced-motion: reduce) {
+    .skillBar {
+        transition: none;
     }
 
-    .skillBarImg {
-        height: 2.25rem;
-        width: 2.25rem;
-    }
-
-    .skillBarText {
-        font-size: 5vw;
+    .skillBar:hover,
+    .skillBar:focus-within {
+        transform: none;
     }
 }

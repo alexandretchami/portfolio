@@ -1,55 +1,186 @@
+/* ===== Works / Portfolio section ===== */
 #works {
-    margin: 0 auto;
+    --works-accent: #4f9cff;
+    --works-text-muted: rgba(255, 255, 255, 0.72);
+    --works-radius: 0.75rem;
+
+    width: 100%;
+    max-width: 70rem;
     min-height: calc(100vh - 4rem);
-    width: 100vw;
-    max-width: 60rem;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 0 1rem;
 }
 
+/* ----- Header ----- */
 .worksTitle {
-    margin: 1rem 0;
-    font-size: 3rem;
+    margin: 0 0 2rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+.worksTitle::after {
+    content: '';
+    display: block;
+    width: 3.5rem;
+    height: 0.25rem;
+    margin: 0.75rem auto 0;
+    border-radius: 999px;
+    background: var(--works-accent);
 }
 
 .worksDesc {
+    max-width: 42rem;
+    margin: 0 0 3rem;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
     font-weight: 300;
-    font-size: 1rem;
-    max-width: 45rem;
+    line-height: 1.75;
+    color: var(--works-text-muted);
 }
 
+/* ----- Gallery grid ----- */
 .worksImgs {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100vw;
-    max-width: 65rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1.25rem;
+}
+
+.worksItem {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--works-radius);
+    aspect-ratio: 16 / 10;
+    background: rgb(38, 38, 42);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.worksItem:hover,
+.worksItem:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
 .worksImg {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    height: 10rem;
-    margin: 0.5rem;
-    cursor: pointer;
+    transition: transform 0.4s ease;
 }
 
+.worksItem:hover .worksImg,
+.worksItem:focus-within .worksImg {
+    transform: scale(1.06);
+}
+
+/* Caption fades in on hover / focus */
+.worksCaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 2rem 1rem 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: left;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.worksItem:hover .worksCaption,
+.worksItem:focus-within .worksCaption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Caption content: title + technologies */
+.worksCaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.worksCaption strong {
+    font-weight: 600;
+}
+
+.worksCaption small {
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ----- Button (rendered as a link) ----- */
 .workBtn {
-    margin: 3rem 0;
-    padding: 0.5rem 2.5rem;
-    border: none;
-    background: white;
+    display: inline-block;
+    text-decoration: none;
+    margin: 3rem 0 0;
+    padding: 0.75rem 2.5rem;
+    border: 2px solid #fff;
     border-radius: 2rem;
+    background: #fff;
+    color: #111;
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease,
+        transform 0.25s ease;
 }
 
-@media screen and (max-width:585px) {
-    .worksImg {
-        height: 48vw;
+.workBtn:hover {
+    background: transparent;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.workBtn:focus-visible,
+.worksItem a:focus-visible {
+    outline: 3px solid var(--works-accent);
+    outline-offset: 3px;
+}
+
+/* ----- Responsive ----- */
+@media screen and (max-width: 585px) {
+    .worksImgs {
+        grid-template-columns: 1fr;
+    }
+
+    /* No hover on touch: keep captions visible */
+    .worksCaption {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ----- Reduced motion ----- */
+@media (prefers-reduced-motion: reduce) {
+    .worksItem,
+    .worksImg,
+    .worksCaption,
+    .workBtn {
+        transition: none;
+    }
+
+    .worksItem:hover,
+    .worksItem:focus-within,
+    .workBtn:hover {
+        transform: none;
+    }
+
+    .worksItem:hover .worksImg,
+    .worksItem:focus-within .worksImg {
+        transform: none;
     }
 }
